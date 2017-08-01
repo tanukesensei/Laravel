@@ -1,0 +1,9 @@
+parei na página 121 do PDF, cap. 8.4
+pag 132 no leitor do pdf.
+
+abas abertas no atom:
+listagem.blade.php
+principal.blade.php
+detalhes.blade.php
+ProdutoController.php
+web.php
