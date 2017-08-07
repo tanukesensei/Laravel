@@ -31,14 +31,7 @@ class ProdutoController extends Controller
 	}
 
 	public function adiciona() {
-		$nome  = Request::input('nome');
-		$valor  = Request::input('valor');
-		$descricao  = Request::input('descricao');
-		$quantidade  = Request::input('quantidade');
-
-		DB::insert('INSERT INTO produtos
-			(nome, valor, descricao, quantidade) values (?,?,?,?)',
-			array($nome, $valor, $descricao, $quantidade));
+		Produto::create(Request::all());
 
 		return redirect()
 				->action('ProdutoController@lista')
@@ -48,6 +41,28 @@ class ProdutoController extends Controller
 	public function listaJson() {
 		$produtos = Produto::all();
 		return response()->json($produtos	);
+	}
+
+	public function remove($id) {
+		$produto = Produto::find($id);
+		$produto->delete();
+		return redirect()
+				->action('ProdutoController@lista');
+	}
+
+	public function edita($id){
+		$produto = Produto::find($id);
+		return view('produtos.edita')->with('p', $produto);
+	}
+
+	public function update() {
+		$params = Request::all();
+		$produto = new Produto($params);
+		$produto->save();
+
+		return redirect()
+				->action('ProdutoController@lista')
+				->withInput(Request::only('nome'));
 	}
 
 }

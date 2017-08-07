@@ -48,3 +48,13 @@ Route::get(
   Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
 
   Route::get('/produtos/json', 'ProdutoController@listaJson');
+
+  Route::get(
+    '/produtos/remove/{id}',
+    'ProdutoController@remove'
+    )
+    ->where('id', '[0-9]+');
+
+  Route::get('/produtos/edita/{id}', 'ProdutoController@edita')->where('id', '[0-9]+');
+
+  Route::get('/produtos/update', 'ProdutoController@update');
