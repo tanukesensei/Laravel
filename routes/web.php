@@ -57,4 +57,4 @@ Route::get(
 
   Route::get('/produtos/edita/{id}', 'ProdutoController@edita')->where('id', '[0-9]+');
 
-  Route::get('/produtos/update', 'ProdutoController@update');
+  Route::put('/produtos/update/{id}', 'ProdutoController@update')->where('id', '[0-9]+');

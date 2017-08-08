@@ -31,6 +31,17 @@ class ProdutoController extends Controller
 	}
 
 	public function adiciona() {
+
+
+		$this->validate(Request::input('nome'), [
+			'nome' => 'required|min:5'
+		]);
+			/*
+		if ($validator->fails()) {
+			return redirect()->action('ProdutoController@novo');
+		}
+		*/
+
 		Produto::create(Request::all());
 
 		return redirect()
@@ -51,18 +62,15 @@ class ProdutoController extends Controller
 	}
 
 	public function edita($id){
-		$produto = Produto::find($id);
+		$produto = Produto::find($id);/*Acha o produto pelo ID, instancia o objeto e manda as informações
+		para a view Edita*/
 		return view('produtos.edita')->with('p', $produto);
 	}
 
-	public function update() {
-		$params = Request::all();
-		$produto = new Produto($params);
-		$produto->save();
-
-		return redirect()
-				->action('ProdutoController@lista')
-				->withInput(Request::only('nome'));
+	public function update($id) {
+		/*Recebe o ID, */
+		Produto::find($id)->update(Request::all());
+		return redirect()->action('ProdutoController@lista');
 	}
 
 }

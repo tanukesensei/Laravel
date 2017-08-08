@@ -4,8 +4,8 @@
 
 <h1>Editar produto</h1>
 
-<form class="" action="/produtos/adiciona" method="post">
-
+<form class="" action="{{action('ProdutoController@update', $p->id)}}" method="post">
+  {!! method_field('put') !!}
   <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
 
   <div class="form-group">
@@ -24,7 +24,7 @@
     <label for="">Quantidade</label>
     <input type="number" name="quantidade" value="{{$p->quantidade}}" class="form-control">
   </div>
-  <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  <button type="submit" class="btn btn-primary btn-block">Atualuzar</button>
 </form>
 
 @stop
